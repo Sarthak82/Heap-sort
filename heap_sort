@@ -1,0 +1,63 @@
+def swap(list,i,j):
+    list[i],list[j]=list[j],list[i]
+
+def siftDown(list,i,upper):
+    while (True):
+        # children of tree
+        left,right=i*2+1,i*2+2
+        if max(left,right)<upper:
+            if list[i]>=max(list[left],list[right]):
+                break
+            elif list[left]>list[right]:
+                swap(list,i,left)
+                # moving down pointer for parent node
+                i=left
+            else:
+                swap(list,i,right)
+                i=right
+        elif left<upper:
+            if list[left]>list[i]:
+                swap(list,i,left)
+                i=left
+            
+            else:
+                break
+        elif right<upper:
+            if list[right]>list[i]:
+                swap(list,i,right)
+                i=right
+            else:
+                break
+        else:
+            break
+        
+        
+def heapSort(list):
+    # it is the address of last parent node 
+    #heapify
+    for j in range((len(list)-2)//2,-1,-1):
+        siftDown(list,j,len(list))
+    
+    # implement sorting component
+    for end in range(len(list)-1,0,-1):
+        swap(list,0,end)
+        siftDown(list,0,end)
+    
+    return list
+
+list=[10,5,6,8,2,13,1]
+print(heapSort(list))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
